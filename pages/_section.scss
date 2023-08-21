@@ -1,0 +1,109 @@
+$phone: "max-width: 767px";
+@mixin displayFlexBetwwen(){
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@mixin mainColor(){
+  color: var(--mainColor)
+}
+@mixin mainBackgrondColorTransparncy(){
+  background-color: #7562e030;
+}
+@mixin BackgroundMainColor(){
+  background-color: var(--mainColor)
+}
+@mixin borderMainColor(){
+  border:1px solid var(--mainColor)
+}
+@mixin rad10(){
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+section{
+  width: fit-content;
+  display: flex;
+  margin: 50px auto 0;
+  .img{
+    text-align: center;
+    margin: 0  20px 0 0;
+    background-color: #fff;
+    padding: 30px;
+    @include rad10();
+    img{
+      width: 150px;
+    }
+  }
+  .info{
+    background-color: #fff;
+    padding: 30px;
+    @include rad10();
+    h3{}
+    p{}
+    .btn{
+      @include borderMainColor();
+      @include mainColor();
+      @include rad10();
+      padding: 5px;
+      text-align: center;
+      margin-top: 10px;
+      i{}
+      button{
+        @include mainColor();
+        background-color: #fff;
+      }
+    }
+  }
+}
+// .links{
+//   width: 100%;
+//   display: block;
+//   margin: 10px 0;
+//   padding: 0 0 5px;
+//   @include mainColor();
+// }
+// .box{
+//   display: flex;
+//   align-items: center;
+//   border-bottom: 1px solid var(--mainColor);
+// }
+.information{
+    #thing{
+      @include rad10();
+padding: 10px 15px;
+margin: 10px 0 0;
+    display: block;
+    border: 1px solid #eee;
+    &:focus{
+@include borderMainColor();
+    }
+  }
+  #btn{
+    padding: 5px;
+    border-radius: 10px;
+    margin: 10px 0 0;
+    background: var(--mainColor);
+    color: #fff;
+  }
+}
+@media ($phone){
+  header{
+    flex-direction: column;
+  }
+  .name,
+  .current{
+    margin-bottom: 10px;
+  }
+  .review{
+    margin: 10px 0 ;
+  }
+  section{
+    display: block;
+  }
+  .img{
+    margin:0 0 10px !important;
+  }
+}
