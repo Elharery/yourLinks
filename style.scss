@@ -1,5 +1,6 @@
 @use "./pages/header"  as *;
 @use "./pages/section"  as *;
+@use "./pages/error"  as *;
 :root{
   --mainColor: #7562e0;
   --mainColorTransparncy: #7562e030;
@@ -22,4 +23,10 @@ body{
 }
 .pointer{
   cursor: pointer;
+  
+}
+.adding{
+  pointer-events: none;
+  border-color: #eee !important;
+  color: #eee !important;
 }

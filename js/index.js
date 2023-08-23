@@ -1,5 +1,5 @@
-let info = document.querySelector(".info")
-// let inp = document.querySelector(".inp")
+let info = document.querySelector(".info");
+let parent = document.querySelector(".parent");
 // const btn = document.getElementById("btn")
 // const a = document.getElementById("a")
 // const input = document.getElementById("thing")
@@ -9,55 +9,162 @@ let info = document.querySelector(".info")
 // let two = document.querySelector(".two")
 // let three = document.querySelector(".three")
 // let four = document.querySelector(".four")
+// getData();
+// //
+// let arr = [];
+// if (localStorage.getItem("title")) {
+//   arr = JSON.parse(localStorage.getItem("title"));
+// }
+//
 let vari = 0;
 function addInput() {
   //.create inf parent
-  let parent = document.createElement("div")
-  parent.className = "information"
-    // create input
-  let input = document.createElement("input")
+  let divTitle = document.createElement("div");
+  divTitle.className = "input";
+  // create input
+  let input = document.createElement("input");
   input.value = "https://";
-    input.type = "text";
-    // input id
-    input.id = "thing";
-    // create button
-    let btn = document.createElement("button");
-    btn.className = "pointer";
-    btn.id = "btn";
-    // create h3
-    // let h3 = document.createElement("h3");
-    // h3.id = "word";
-    // let h3T = document.createTextNode("a");
-    // h3.appendChild(h3T)
-    btn.innerHTML = "Save";
-    parent.appendChild(input)
-    parent.appendChild(btn)
+  input.type = "text";
+  // input id
+  input.id = "thing";
+  // create button
+
+  let btnSave = document.createElement("button");
+  btnSave.className = "pointer";
+  btnSave.id = "btn";
+  // create h3
+  // let h3 = document.createElement("h3");
+  // h3.id = "word";
+  // let h3T = document.createTextNode("a");
+  // h3.appendChild(h3T)
+  btnSave.innerHTML = "Save";
+  divTitle.appendChild(input);
+  divTitle.appendChild(btnSave);
   // parent.appendChild(info)
-  info.appendChild(parent)
-  btn.onclick = () => {
-    if (thing.value) {
-      window.localStorage.setItem(`input-${vari}`, thing.value)
-      //
-      //
-      let div = document.createElement("div")
-      div.style = "margin: 10px 0 ; border-bottom: 1px solid var(--mainColor); padding-bottom: 5px;"
-      div.id = `input-1`;
-      let link = document.createElement("a");
-      link.style = "font-size : 13px; width: 100%; display: block;"
-      link.href = thing.value;
-      let linkT = document.createTextNode(thing.value);
-      link.appendChild(linkT)
-      div.appendChild(link)
-      parent. before(div)
-        btn.parentElement.remove()
-      }
-    }
+  parent.appendChild(divTitle);
+  function addLinks() {
+    let div = document.createElement("div");
+    div.style =
+    "margin: 10px 0 ; border-bottom: 1px solid #000; padding-bottom: 5px;";
+    div.id = `title`;
+    let link = document.createElement("a");
+    link.style = "font-size : 13px; width: 100%; display: block; color: #000;";
+    link.href = thing.value;
+    let linkT = document.createTextNode(thing.value);
+    link.appendChild(linkT);
+    div.appendChild(link);
+    parent.before(div);
   }
+  btnSave.onclick = () => {
+    console.log("Clicked");
+    // btnSave
+    add.parentElement.classList.toggle("adding")
+    add.classList.toggle("adding")
+    addLinks()
+    btnSave.parentElement.remove()
+  };
+}
+//         let links = {
+  //           title: input.value
+//         }
+//         console.log(links);
+//         arr.push(links)
+//         window.localStorage.setItem("title", JSON.stringify(arr))
 add.onclick = () => {
   // info.style.display = "flex";
   vari++;
-  addInput()
-} 
+  addInput();
+  add.parentElement.classList.toggle("adding")
+  add.classList.toggle("adding")
+  // test()
+};
+// function getData() {
+//   let data = window.localStorage.getItem("title");
+//   if (data) {
+//     let titleL = JSON.parse(data);
+//     console.log(titleL);
+//     // addLinks(titleL)
+//   }
+// }
+//
+// let arr = [];
+// if (localStorage.getItem("title")) {
+//   arr = JSON.parse(localStorage.getItem("title"))
+// }
+// //
+
+// let vari = 0;
+// function addInput() {
+//   //.create inf parent
+//   let parent = document.createElement("div")
+//   parent.className = "information"
+//     // create input
+//     let input = document.createElement("input")
+//     input.value = "https://";
+//     input.type = "text";
+//     // input id
+//     input.id = "thing";
+//     // create button
+
+//     let btnSave = document.createElement("button");
+//     btnSave.className = "pointer";
+//     btnSave.id = "btn";
+//     // create h3
+//     // let h3 = document.createElement("h3");
+//     // h3.id = "word";
+//     // let h3T = document.createTextNode("a");
+//     // h3.appendChild(h3T)
+//     btnSave.innerHTML = "Save";
+//     parent.appendChild(input)
+//     parent.appendChild(btnSave)
+//     // parent.appendChild(info)
+//     info.appendChild(parent)
+//   function test() {
+//     btnSave.onclick = () => {
+//       if (thing.value) {
+//         // window.localStorage.setItem(`input-${vari}`, thing.value)
+//         //
+//         let links = {
+//           title: input.value
+//         }
+//         console.log(links);
+//         arr.push(links)
+//         window.localStorage.setItem("title" , JSON.stringify(arr))
+//         //
+//           let div = document.createElement("div")
+//           div.style = "margin: 10px 0 ; border-bottom: 1px solid var(--mainColor); padding-bottom: 5px;"
+//           div.id = `input-1`;
+//           let link = document.createElement("a");
+//           link.style = "font-size : 13px; width: 100%; display: block;"
+//           link.href = thing.value;
+//           let linkT = document.createTextNode(thing.value);
+//           link.appendChild(linkT)
+//           div.appendChild(link)
+//           parent.before(div)
+//         btn.parentElement.remove()
+//       }
+//     }
+//   }
+//   test()
+//   function getData() {
+//     let data = window.localStorage.getItem("title")
+//     console.log(data);
+//     if (data) {
+//       let title = JSON.parse(data)
+//       console.log(title);
+//       test(title)
+//     }
+//   }
+//   getData()
+//   }
+//   add.onclick = () => {
+//     // info.style.display = "flex";
+
+//     vari++;
+//     addInput()
+//     // test()
+// }
+// //
 // btn.onclick = () => {
 //   if (input.value !== "") {
 //     if (one.innerHTML == "") {

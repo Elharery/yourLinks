@@ -1,0 +1,28 @@
+div{
+  margin: 200px 0px;
+display: flex;
+align-items: center;
+flex-direction: column;
+span.aa{
+  font-size: 100px;
+}
+span.a{
+  font-size: 80px;
+color: lightcoral;
+}
+div p:nth-child(3){
+  font-size: 21px;
+color: gray;
+padding: 0 0 10px;
+}
+div p:nth-child(4){
+  font-size: 15px;
+color: gray;
+}
+a{
+  text-decoration: underline;
+  color: gray;
+}a:hover{
+  color: #000;
+}
+}

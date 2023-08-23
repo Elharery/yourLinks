@@ -1,7 +1,5 @@
 header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: none;
   border-bottom: 1px solid #000;
   padding-bottom: 10px;
   margin: 20px;
@@ -49,7 +47,7 @@ header .review a:hover {
 
 section {
   width: fit-content;
-  display: flex;
+  display: none;
   margin: 50px auto 0;
 }
 section .img {
@@ -132,6 +130,36 @@ section .info .btn button {
     margin: 0 0 10px !important;
   }
 }
+div {
+  margin: 200px 0px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+div span.aa {
+  font-size: 100px;
+}
+div span.a {
+  font-size: 80px;
+  color: lightcoral;
+}
+div div p:nth-child(3) {
+  font-size: 21px;
+  color: gray;
+  padding: 0 0 10px;
+}
+div div p:nth-child(4) {
+  font-size: 15px;
+  color: gray;
+}
+div a {
+  text-decoration: underline;
+  color: gray;
+}
+div a:hover {
+  color: #000;
+}
+
 :root {
   --mainColor: #7562e0;
   --mainColorTransparncy: #7562e030;
@@ -155,4 +183,10 @@ body {
 
 .pointer {
   cursor: pointer;
+}
+
+.adding {
+  pointer-events: none;
+  border-color: #eee !important;
+  color: #eee !important;
 }
