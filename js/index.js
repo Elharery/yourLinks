@@ -1,225 +1,183 @@
 let info = document.querySelector(".info");
 let parent = document.querySelector(".parent");
-// const btn = document.getElementById("btn")
-// const a = document.getElementById("a")
-// const input = document.getElementById("thing")
-// const info = document.querySelector(".link")
-// const btn = document.getElementById("btn")
-// let one = document.querySelector(".first")
-// let two = document.querySelector(".two")
-// let three = document.querySelector(".three")
-// let four = document.querySelector(".four")
-// getData();
-// //
-// let arr = [];
-// if (localStorage.getItem("title")) {
-//   arr = JSON.parse(localStorage.getItem("title"));
-// }
-//
-let vari = 0;
-function addInput() {
-  //.create inf parent
-  let divTitle = document.createElement("div");
-  divTitle.className = "input";
-  // create input
-  let input = document.createElement("input");
-  input.value = "https://";
-  input.type = "text";
-  // input id
-  input.id = "thing";
-  // create button
 
-  let btnSave = document.createElement("button");
-  btnSave.className = "pointer";
-  btnSave.id = "btn";
-  // create h3
-  // let h3 = document.createElement("h3");
-  // h3.id = "word";
-  // let h3T = document.createTextNode("a");
-  // h3.appendChild(h3T)
-  btnSave.innerHTML = "Save";
-  divTitle.appendChild(input);
-  divTitle.appendChild(btnSave);
-  // parent.appendChild(info)
-  parent.appendChild(divTitle);
-  function addLinks() {
-    let div = document.createElement("div");
-    div.style =
-    "margin: 10px 0 ; border-bottom: 1px solid #000; padding-bottom: 5px;";
-    div.id = `title`;
-    let link = document.createElement("a");
-    link.style = "font-size : 13px; width: 100%; display: block; color: #000;";
-    link.href = thing.value;
-    let linkT = document.createTextNode(thing.value);
-    link.appendChild(linkT);
-    div.appendChild(link);
-    parent.before(div);
-  }
-  btnSave.onclick = () => {
-    console.log("Clicked");
-    // btnSave
-    add.parentElement.classList.toggle("adding")
-    add.classList.toggle("adding")
-    addLinks()
-    btnSave.parentElement.remove()
-  };
-}
-//         let links = {
-  //           title: input.value
-//         }
-//         console.log(links);
-//         arr.push(links)
-//         window.localStorage.setItem("title", JSON.stringify(arr))
+let add = document.getElementById("add")
+
+// let arr = [];
+
 add.onclick = () => {
-  // info.style.display = "flex";
-  vari++;
-  addInput();
-  add.parentElement.classList.toggle("adding")
   add.classList.toggle("adding")
-  // test()
-};
-// function getData() {
-//   let data = window.localStorage.getItem("title");
-//   if (data) {
-//     let titleL = JSON.parse(data);
-//     console.log(titleL);
-//     // addLinks(titleL)
-//   }
-// }
-//
-// let arr = [];
-// if (localStorage.getItem("title")) {
-//   arr = JSON.parse(localStorage.getItem("title"))
-// }
-// //
+  add.parentElement.classList.toggle("adding")
+  getInput()
+}
+let arr = [];
+function checkLocalStorage() {
+  if (JSON.parse(localStorage.getItem("links"))) {
+    arr = [...JSON.parse(localStorage.getItem("links"))]
+  }
+}
 
+function getInput() {
+  let div = document.createElement("div")
+  div.className = "link";
+  //
+  let input = document.createElement("input")
+  input.value = "https://";
+  input.id = "thing";
+  //
+  input.addEventListener("change", () => {
+    checkLocalStorage()
+    let link = {
+      name: input.value,
+      complete: false,
+      id: Date.now(),
+    }
+    localStorage.setItem("links", JSON.stringify([...arr, link]))
+    checkLocalStorage()
+  })
+
+  //
+  let buttonDelete = document.createElement("button")
+  buttonDelete.style.cursor = "pointer";
+  buttonDelete.onclick = function () {
+    parent.innerHTML = "";
+    add.classList.toggle("adding")
+    add.parentElement.classList.toggle("adding")
+    link()
+    this.parentElement.remove()
+  }
+  buttonDelete.id = "btn";
+  buttonDelete.appendChild(document.createTextNode("Save"))
+  div.appendChild(input)
+  div.appendChild(buttonDelete)
+  parent.appendChild(div)
+  info.appendChild(parent)
+}
+function handleDelete(id) {
+  let arr = JSON.parse(localStorage.getItem("links"));
+  arr = arr.filter(e => {
+    return e.id !== id;
+  })
+  localStorage.setItem("links", JSON.stringify(arr))
+}
+
+function link() {
+  // if (document.getElementById("linkId")) {
+  //   document.getElementById("linkId").remove()
+  // }
+  // let linkDiv = document.createElement("div")
+  // parent.id = "linkId";
+  checkLocalStorage();
+  for (let i = 0; i < arr.length; i++){
+    let div = document.createElement("div");
+    div.className = "linkDiv";
+    // div.id = `Link`;
+    //
+    let link = document.createElement("a");
+    link.href = arr[i].name
+    link.appendChild(document.createTextNode(arr[i].name))
+    // link.appendChild(document.createTextNode(arr[i].id))
+    link.style = "font-size : 13px; width: 100%; display: block; color: #000;";
+    //
+    let button = document.createElement("i");
+    button.className = "fa-solid fa-trash-can Delete delIcon"
+    button.onclick = () => {
+      handleDelete(arr[i].id)
+      button.parentElement.remove();
+    };
+    // button.appendChild(document.createTextNode("i"))
+    div.appendChild(link)
+    div.appendChild(button)
+    parent.appendChild(div)
+    // linkDiv.appendChild(div)
+    info.appendChild(parent)
+  }
+}
+link()
+
+// add.onclick = () => {
+//   vari++;
+//   addInput();
+//   add.parentElement.classList.toggle("adding");
+//   add.classList.toggle("adding");
+// };
 // let vari = 0;
 // function addInput() {
 //   //.create inf parent
-//   let parent = document.createElement("div")
-//   parent.className = "information"
-//     // create input
-//     let input = document.createElement("input")
-//     input.value = "https://";
-//     input.type = "text";
-//     // input id
-//     input.id = "thing";
-//     // create button
+//   let divTitle = document.createElement("div");
+//   divTitle.className = "input";
+//   // create input
+//   let input = document.createElement("input");
+//   input.placeholder = "https://";
+//   input.type = "text";
+//   // input id
+//   input.id = "thing";
+//   // create button
 
-//     let btnSave = document.createElement("button");
-//     btnSave.className = "pointer";
-//     btnSave.id = "btn";
-//     // create h3
-//     // let h3 = document.createElement("h3");
-//     // h3.id = "word";
-//     // let h3T = document.createTextNode("a");
-//     // h3.appendChild(h3T)
-//     btnSave.innerHTML = "Save";
-//     parent.appendChild(input)
-//     parent.appendChild(btnSave)
-//     // parent.appendChild(info)
-//     info.appendChild(parent)
-//   function test() {
-//     btnSave.onclick = () => {
-//       if (thing.value) {
-//         // window.localStorage.setItem(`input-${vari}`, thing.value)
-//         //
-//         let links = {
-//           title: input.value
-//         }
-//         console.log(links);
-//         arr.push(links)
-//         window.localStorage.setItem("title" , JSON.stringify(arr))
-//         //
-//           let div = document.createElement("div")
-//           div.style = "margin: 10px 0 ; border-bottom: 1px solid var(--mainColor); padding-bottom: 5px;"
-//           div.id = `input-1`;
-//           let link = document.createElement("a");
-//           link.style = "font-size : 13px; width: 100%; display: block;"
-//           link.href = thing.value;
-//           let linkT = document.createTextNode(thing.value);
-//           link.appendChild(linkT)
-//           div.appendChild(link)
-//           parent.before(div)
-//         btn.parentElement.remove()
-//       }
-//     }
+//   let btnSave = document.createElement("button");
+//   btnSave.className = "pointer";
+//   btnSave.id = "btn";
+//   // create h3
+//   // let h3 = document.createElement("h3");
+//   // h3.id = "word";
+//   // let h3T = document.createTextNode("a");
+//   // h3.appendChild(h3T)
+//   // let arr = []
+//   // let obj = {
+//   //   link: input.value
+//   // }
+//   // arr.push(obj)
+
+//   // input.addEventListener("change", () => {
+//   //   localStorage.getItem("val")
+//   // })
+
+//   // input.oninput = () => {
+//   //   localStorage.setItem("val", input.value)
+//   // }
+//   btnSave.innerHTML = "Save";
+//   divTitle.appendChild(input);
+//   divTitle.appendChild(btnSave);
+//   // parent.appendChild(info)
+//   parent.appendChild(divTitle);
+//   function addLinks() {
+//     let div = document.createElement("div");
+//     div.style =
+//       "margin: 10px 0 ; border-bottom: 1px solid #000; display: flex; align-items: center; padding-bottom: 5px;";
+//     div.id = `Link`;
+//     //
+//     let button = document.createElement("button");
+//     button.style =
+//       "background: red; padding: 5px; border-radius: 7px; cursor: pointer; font-size: 10px; color: #fff;";
+//     button.onclick = () => {
+//       button.parentElement.remove();
+//     };
+//     let buttonDelete = document.createTextNode("Delete");
+//     let link = document.createElement("a");
+//     link.style = "font-size : 13px; width: 100%; display: block; color: #000;";
+//     link.href = localStorage.getItem("val");
+
+//     let linkT = document.createTextNode(localStorage.getItem("val"));
+//     link.appendChild(linkT);
+//     button.appendChild(buttonDelete);
+//     div.appendChild(link);
+//     div.appendChild(button);
+//     parent.appendChild(div);
 //   }
-//   test()
-//   function getData() {
-//     let data = window.localStorage.getItem("title")
-//     console.log(data);
-//     if (data) {
-//       let title = JSON.parse(data)
-//       console.log(title);
-//       test(title)
+//   btnSave.onclick = () => {
+//     let arr = []
+//     let obj = {
+//       link: input.value
 //     }
-//   }
-//   getData()
-//   }
-//   add.onclick = () => {
-//     // info.style.display = "flex";
-
-//     vari++;
-//     addInput()
-//     // test()
+//     arr.push(obj)
+//     console.log(arr);
+//     localStorage.setItem("val", arr)
+//       addLinks();
+//       // console.log(links);
+//       add.parentElement.classList.toggle("adding");
+//       add.classList.toggle("adding");
+//       console.log("Clicked");
+//       btnSave.parentElement.remove();
+//     // btnSave
+//   };
 // }
-// //
-// btn.onclick = () => {
-//   if (input.value !== "") {
-//     if (one.innerHTML == "") {
-//       one.innerHTML = input.value;
-//       one.href = input.value;
-//       one.classList.add("links");
-//       window.localStorage.setItem("one" , one.innerHTML)
-//     } else if (two.innerHTML == "") {
-//       two.innerHTML = input.value;
-//       two.href = input.value;
-//       two.classList.add("links")
-//       window.localStorage.setItem("two" , two.innerHTML)
-//     }
-//     else if (three.innerHTML == "") {
-//       three.innerHTML = input.value;
-//       three.href = input.value;
-//       three.classList.add("links")
-//       window.localStorage.setItem("three" , three.innerHTML)
-//     }
-//     else if (four.innerHTML == "") {
-//       four.innerHTML = input.value;
-//       four.href = input.value;
-//       four.classList.add("links")
-//       window.localStorage.setItem("four" , four.innerHTML)
-//     } else {
-//       alert("Error")
-//     }
-//     input.value = "";
-//     // location.reload()
-//     btn.parentElement.parentElement.remove();
-//   }
-// }
-
-// if (window.localStorage.getItem("one")) {
-//   one.innerHTML = localStorage.getItem("one");
-//   one.href = localStorage.getItem("one");
-//   one.classList.add("links");
-// }
-
-// if (window.localStorage.getItem("two")) {
-//   two.innerHTML = localStorage.getItem("two");
-//   two.href = localStorage.getItem("two");;
-//   two.classList.add("links");
-// }
-// if (window.localStorage.getItem("three")) {
-//   three.innerHTML = localStorage.getItem("three");
-//   three.href = localStorage.getItem("three");
-//   three.classList.add("links");
-// }
-// if (window.localStorage.getItem("four")) {
-//   four.innerHTML = localStorage.getItem("four");
-//   four.href = localStorage.getItem("four");
-//   four.classList.add("links");
-// }
-
-// // add.addEventListener("click", ()=> {
-// //   addInput()
-// // }  )
